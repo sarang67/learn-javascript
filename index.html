@@ -12,6 +12,122 @@
         <p class="logo-name">JS-Basic</p>
       </div>
     <div id="app"></div>
+    <script>
+
+   // behavopur of this
+
+
+
+
+
+//       // bea=haviour of this
+//       // scope one global
+//       console.log(this);  // window
+
+//       // function will always point to windoe object or global context/scope object no matter where ypu have written
+//       function checkthis(){
+//         // scope Two 
+//         console.log(this)  // window --> behaviour , bug
+//       }
+    
+//       // function will always point to windoe object or global context/scope object no matter where ypu have written
+//       const checkthis2  = function(){
+//         // scope three
+//         console.log(this) // window --> behaviour , bug
+//       }
+    
+//       // function
+//       const checkthis3 = () => {
+//         console.log(this) // window  // jus scope main likhoge uska this behaviour adopt ker lega
+//       }
+
+//       checkthis();
+//       checkthis2();
+//       checkthis3();
+
+
+//       // method
+//      // this behaviour part 2
+//       let obj = {
+//         myname: 'sarang',
+//         age: 30,
+//         // method scope will always point to its own object
+//         checkthis: function() {
+//           // method scope 
+//            console.log(this)  // own object
+//            const _this = this;
+
+//            // function will always point to windoe object or global context/scope object no matter where ypu have written
+//            function checkthis2(){
+//               console.log('--->', this)
+//               console.log(_this)
+//            }
+//             checkthis2();
+
+//           // function will always point to windoe object or global context/scope object no matter where ypu have written
+//            const checkthis3 = function(){
+//             console.log('==>', this)
+//             console.log(_this)
+           
+//             // jis scope main likhaa gaya hai uskaa this adopt ker leta hai
+//             const checkthis5 = () =>{
+//               console.log('####', this)
+//             }
+//             checkthis5();
+
+//            } 
+//            checkthis3();
+
+//            // jis scope main likhaa gaya hai uskaa this adopt ker leta hai
+//             const checkthis4 = () =>{
+//               console.log('****', this)
+//             }
+//             checkthis4();
+//         }
+//       }
+
+//       console.log(obj.checkthis())
+
+
+
+
+// /*
+//  // function will always point to windoe object or global context/scope object no matter where ypu have written
+//  // method scope will always point to its own object
+//  // fat arrow ,jis scope main likhaa gaya hai uskaa this adopt ker leta hai
+// */
+
+// //global scope
+// // function/method scope
+
+// console.log('----------------------------------')
+// let obj3 = {
+//   name:'sarang jain',
+ 
+//   method1:function(){
+//     //
+//     console.log('-->', this)
+
+//     const method3 = () =>{
+//         console.log('###',this)
+//     }
+//     method3()
+//   },
+ 
+//   // always remember you font have to use arrow fun in the object as a method
+//   method2 :() =>{
+//     console.log('==>',this)
+//   }
+// }
+// obj3.method1()
+// obj3.method2()
+
+
+
+
+
+
+    </script>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
