@@ -5,277 +5,153 @@ app.innerHTML = `
     <h1>Modern JavaScript: Basic</h1>
   `;
 
-// OBJECT iteration
-// rest operator(...) / spread operator (...)
+// 1) how to create array
+// array literal way --preferred way
 
-const drink = {
-  name: "coca-cola",
-  id: "🍾",
-  brand: "softdrink",
-  price: {
-    sale: 99,
-    regular: 200,
-  },
-};
-
-const drink2 = {
-  name: "coca-cola",
-  id: "🍾",
-  brand: "softdrink",
-};
-
-const price2 = {
-  sale: 99,
-  regular: 200,
-};
-
-/*
-  LHS (rest) = RHS (spread)
-*/
-
-const spreadObj = { ...drink2, age: 44, ...price2 };
-
-console.log(spreadObj);
-
--------------------------------------------------
-
-// property exstance
-
-const drink = {
-  name: "coca-cola",
-  id: "🍾",
-  brand: "softdrink",
-  price: {
-    sale: 99,
-    regular: 200,
-  },
-
-  hasOwnProperty() {
-    return false;
-  },
-};
-
-console.log(drink.hasOwnProperty("brand"));
-console.log(Object.prototype.hasOwnProperty.call(drink, ["brand"]));
-
+const drink = ["coke", "pepsi", "thumbsup"];
 console.log(drink);
 
----------------------
-// pobject cloning and problem // shallow copy and deep copy
+const drink2 = new Array("coke", "pepsi", "thumbsup");
+console.log(drink2);
 
-const drink = {
-  name: "coca-cola",
-  id: "🍾",
-  brand: "softdrink",
-  price: {
-    sale: 99,
-    regular: 200,
+const drink3 = Array("coke", "pepsi", "thumbsup"); // new Array("coke", "pepsi", "thumbsup");
+console.log(drink3);
+
+// js array --> collection of anything
+
+const collection = [
+  "sarang",
+  34,
+  true,
+  ["kk", "abhishek", "sonu"],
+  { city: "gwalior", colony: "vinaynagar" },
+  function () {
+    console.log("test");
   },
-};
+];
 
-// Object.assign() and spread dont work when its come to the deep copy
+console.log(collection);
 
-// way 1
-//const anotherDrink = drink;
-//const anotherDrink = Object.assign({}, drink); // cloning ref break
+----------------
 
-// way 2 spread
-//const anotherDrink = { ...drink };
+// 2 array --> mutable data structure , pass by refrence(address)
+
+const drink = ["coke", "pepsi", "thumbsup"];
+
+const drink2 = drink;
+
+drink2.push("water");
+drink.push("soda-water");
+
 console.log(drink);
+console.log(drink2);
 
-//anotherDrink.brand = "hard drink";
+-------------------------------
 
-const drinkString = JSON.stringify(drink);
-const anotherDrink = JSON.parse(drinkString);
+// 2 array , indexes and properties
 
-anotherDrink.price.sale = 200;
-console.log(anotherDrink);
-====================================
-// oBJECT MERGING
+let drink = ["coke", "pepsi", "thumbsup", "water"];
 
-const drink = {
-  name: "coca-cola",
-  id: "🍾",
-  brand: "softdrink",
-  price: {
-    sale: 99,
-    regular: 200,
-  },
-};
+console.log(drink[0]);
+console.log(drink["1"]);
+console.log(drink["2"]);
 
-const drink2 = {
-  name: "coca-cola",
-  id: "🍾",
-  brand: "softdrink",
-};
+drink[0] = "cocacola";
 
-const price = {
-  sale: 99,
-  regular: 200,
-};
+//drink["favDrink"] = "limca";
 
-const mergeObj = { ...drink2, ...price };
-const mergeObj2 = Object.assign({}, drink2, price);
+// access element --> first emelemt
+console.log(drink[0]);
 
-const mergeObj3 = { ...drink2, price };
-const mergeObj4 = Object.assign({}, drink2, { price });
+// access element --> last emelemt
+console.log(drink[drink.length - 1]);
 
-console.log(mergeObj);
-console.log(mergeObj2);
-console.log("-----------------------");
-console.log(mergeObj3);
-console.log(mergeObj4);
+// need to make empty array
+// --> not recommended
+//drink = [];
 
-
-==================================================
-// OBJECT type checking
-const drink = {
-  name: "coca-cola",
-  id: "🍾",
-  brand: "softdrink",
-  price: {
-    sale: 99,
-    regular: 200,
-  },
-};
-
-const arr = [1, 2, 3];
-const num = 5;
-
-const http = new XMLHttpRequest();
-
-console.log(typeof drink);
-console.log(typeof []);
-console.log(typeof null); // javascript bug
-
-console.log({} instanceof Object);
-console.log(new Object() instanceof Object);
-console.log([] instanceof Object);
-console.log(new Array() instanceof Object);
-
-console.log(getType(drink));
-console.log(getType(arr));
-console.log(getType(num));
-console.log(getType(null));
-console.log(getType(undefined));
-console.log(getType(false));
-console.log(getType(http));
-console.log(getType(() => {}));
-
-function getType(obj) {
-  return Object.prototype.toString.call(obj).slice(8, -1);
-}
-
-==============================================
-
-// OBJECT iteration
-const drink = {
-  frindName: [1, 2, 3],
-  name: "coca-cola",
-  id: "🍾",
-  //brand: "softdrink",
-  price: {
-    sale: 99,
-    regular: 200,
-  },
-};
-
-// for in
-
-for (let prop in drink) {
-  console.log(prop); // name
-  console.log(drink[prop]); // "coca-cola"
-
-  if (Object.prototype.toString.call(drink[prop]).slice(8, -1) === "Object") {
-    for (let key in drink[prop]) {
-      console.log(key);
-      console.log(drink[prop][key]);
-    }
-  }
-}
-
-=================================
-// OBJECT iteration
-const drink = {
-  name: "coca-cola",
-  id: "🍾",
-  brand: "softdrink",
-  price: {
-    sale: 99,
-    regular: 200,
-  },
-};
-
-// for in
-
-for (let prop in drink) {
-  console.log(prop); // name
-  console.log(drink[prop]); // "coca-cola"
-
-  if (Object.prototype.toString.call(drink[prop]).slice(8, -1) === "Object") {
-    for (let key in drink[prop]) {
-      console.log(key);
-      console.log(drink[prop][key]);
-    }
-  }
-}
-
+//recommended
+drink.length = 0;
+console.log(drink);
 ==============================
-// OBJECT iteration
-const drink = {
-  name: "coca-cola",
-  id: "🍾",
-  brand: "softdrink",
-  price: {
-    sale: 99,
-    regular: 200,
-  },
-};
+// 2 multi dimenssional array :- array inside array
+//[[], [], []];
+//[[[]] , [[]] , [[]]]
 
-const keys = Object.keys(drink);
-keys.forEach((key) => {
-  console.log(drink[key]);
-});
+const drink = [["coke", 99], ["pepsi, 90"], ["thumbsup", 50]];
 
-console.log(Object.entries(drink));
+const drinkName = drink[0][0];
+const drinkCost = drink[0][1];
 
-const entries = Object.entries(drink);
+console.log(drinkName, drinkCost);
 
-console.log(Object.fromEntries(entries));
+====================================
+// 4 array destructure
 
-Object.freeze(drink);
-console.log(Object.isExtensible(drink));
+const drink = [
+  ["coke", 99],
+  ["pepsi", 90],
+  ["thumbsup", 50],
+];
 
-//drink.test = "check";
-//console.log(drink);
+// const drinkOne = drink[0];
+// const drinkTwo = drink[1];
+// const drionkTwoName = drink[1][0];
+// const drionkTwoPrice = drink[1][1];
+// const drinkThree = drink[2];
 
-======================
-// OBJECT iteration
-const drink = {
-  name: "coca-cola",
-  id: "🍾",
-  brand: "softdrink",
-  price: {
-    sale: 99,
-    regular: 200,
-  },
-};
+//const [drinkOne, drinkTwo, drinkThree] = drink;
+//console.log(drinkOne, drinkTwo, drinkThree);
 
-const keys = Object.keys(drink);
-keys.forEach((key) => {
-  console.log(drink[key]);
-});
+//const [drinkOne, [drinkTwoName, drinkTwoPrice], drinkThree] = drink;
+//console.log(drinkOne, drinkTwoName, drinkTwoPrice, drinkThree);
 
-console.log(Object.entries(drink));
+// const [drinkOne, , drinkThree] = drink;
+// console.log(drinkOne, drinkThree);
 
-const entries = Object.entries(drink);
+const drinks = ["coke", "pepsi", "thumbsup", "mirinda"];
+const [drink1, d2, ...restDrink] = drinks;
+console.log(drink1, d2, restDrink);
 
-console.log(Object.fromEntries(entries));
 
-Object.freeze(drink);
-console.log(Object.isExtensible(drink));
+// 4 array destructure
 
-//drink.test = "check";
-//console.log(drink);
+const drink = [
+  ["coke", 99],
+  ["pepsi", 90],
+  ["thumbsup", 50],
+];
+
+// const drinkOne = drink[0];
+// const drinkTwo = drink[1];
+// const drionkTwoName = drink[1][0];
+// const drionkTwoPrice = drink[1][1];
+// const drinkThree = drink[2];
+
+//const [drinkOne, drinkTwo, drinkThree] = drink;
+//console.log(drinkOne, drinkTwo, drinkThree);
+
+//const [drinkOne, [drinkTwoName, drinkTwoPrice], drinkThree] = drink;
+//console.log(drinkOne, drinkTwoName, drinkTwoPrice, drinkThree);
+
+// const [drinkOne, , drinkThree] = drink;
+// console.log(drinkOne, drinkThree);
+
+// const drinks = ["coke", "pepsi", "thumbsup", "mirinda"];
+// const [drink1, d2, ...restDrink] = drinks;
+// console.log(drink1, d2, restDrink);
+
+const [d1, ...restDrinks] = drink;
+console.log(d1, restDrinks);
+
+
+// 5 array spread parameter
+
+const drinkOne = ["coke", "pespsi", "limca"];
+const drionkTwo = ["tea", "cofee", "soup"];
+
+const allDrinks = ["maza", ...drionkTwo, "slice", ...drinkOne, "hot water"];
+console.log(allDrinks);
+
 
 
